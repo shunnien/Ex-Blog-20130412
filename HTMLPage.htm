@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <style type="text/css">
+        .myclass
+        {
+            width: 200px;
+            ime-mode: disabled;
+            -moz-ime-mode: disabled;
+            -ms-ime-mode: :disabled;
+            -webkit-ime-mode: disabled;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("#txtDis").bind("keypress", function (e) {
+                var ecode = e.charCode || e.keyCode;
+                var oElement = e.target || e.srcElement;
+                if (!e.shiftKey && !e.ctrlKey && !e.altKey) {
+                    // Allow Number
+                    if ((ecode > 47 && ecode < 58) ||
+                    // Allow escape, and enter
+                           ecode == 27 || ecode == 13) {
+                        oElement.value = oElement.value;
+                    }
+                    else {
+                        if (window.event) //IE
+                            event.returnValue = false;
+                        else //Firefox
+                            e.preventDefault();
+                    }
+                }
+            }).attr("type", "number");
+        });
+    </script>
+</head>
+<body>
+    <form>
+    <div>
+        <input id="txtDis" class="myclass" type="text" size="10" value=''>
+        <input type="submit">
+    </div>
+    </form>
+</body>
+</html>
